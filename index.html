@@ -6,10 +6,9 @@
 
   <title>OpenActive Infrastructure Build and Dependency Monitor</title>
   
-  <link href="https://cdn.rawgit.com/knsv/mermaid/8.6.4/dist/mermaid.css" rel="stylesheet" />
-  <script src="https://cdn.rawgit.com/knsv/mermaid/8.6.4/dist/mermaid.min.js"></script>
+  <script src="https://unpkg.com/mermaid@8.6.4/dist/mermaid.min.js"></script>
   <script>
-  $(document).load(function() {
+  window.onload = function() {
     mermaid.initialize({
       startOnLoad: true,
       "theme": "default",
@@ -20,7 +19,7 @@
         "curve": "cardinal"
       }
     });
-  });
+  };
   </script>
 </head>
 
