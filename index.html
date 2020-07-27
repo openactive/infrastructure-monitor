@@ -29,20 +29,29 @@
 flowchart BT
 
   subgraph validator [Conformance]
+    
     DMV["Model<br/>Validator<br/>Library<br/><img src='https://travis-ci.com/openactive/data-model-validator.svg?branch=master'/>"]
+    
     RPDEValidator["RPDE<br/>Validator<br/>Library<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+    
     TS["Test Suite<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+    
   end
 
   DMVS["Validator GUI<br/><img src='https://travis-ci.com/openactive/data-model-validator-site.svg?branch=master'/>"] 
+    
   click DMVS "https://github.com/openactive/data-model-validator-site/"
 
 
   
   subgraph models [Models]
-  Schema["Schema.org<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
-  Beta["Beta Namespace<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
-  DM["Data Models<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+    
+    Schema["Schema.org<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+
+    Beta["Beta Namespace<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+
+    DM["Data Models<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+
   end
   
 
@@ -55,56 +64,82 @@ flowchart BT
   OA.Fakedatabase.NET["Fake Database<br/>.NET<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
 
   model-lib["Model Generator<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+    
   Schema.NET["Schema.NET<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
   
   OA.NET["Model Library<br/>.NET<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+    
   models-php["Model Library<br/>PHP<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+    
   models-ruby["Model Library<br/>Ruby<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
   
   OA.Dataset.NET["Dataset Site<br/>Library .NET<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+    
   dataset-site-php["Dataset Site<br/>Library PHP<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+    
   dataset-site-ruby["Dataset Site<br/>Library Ruby<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
 
   ref-php["PHP Open Data<br/>Reference<br/>Implementation<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+    
   ref-ruby["Ruby Open Data<br/>Reference<br/>Implementation<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
   
   subgraph harvesting [Harvesting]
-  CS["Conformance<br/>Services<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
-  Status["Status Page<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+    
+    CS["Conformance<br/>Services<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+
+    Status["Status Page<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+
   end
 
 
 
   ActivityList["Activity List<br/>JSON-LD<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+    
   ActivityListEditor["Activity List<br/>Editor<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
 
 
   subgraph specs [Specifications]
-  RPDESpec["RPDE<br/>Specification<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
-  OpenBookingSpec["Open Booking API<br/>Specification<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
-  ModelsSpec["Modelling<br/>Specification<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+    
+    RPDESpec["RPDE<br/>Specification<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+
+    OpenBookingSpec["Open Booking API<br/>Specification<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+
+    ModelsSpec["Modelling<br/>Specification<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+
   end
 
   model-lib --> models
 
   models-php --> model-lib
+    
   OA.NET --> model-lib
+    
   models-ruby --> model-lib
 
   subgraph ruby-lib [Ruby Libraries]
+    
   ref-ruby --> dataset-site-ruby --> models-ruby
+    
   ref-ruby --> models-ruby
+    
   end
 
   subgraph net-lib [.NET Libraries]
+    
   Ref.NET --> OA.Server.NET --> OA.NET & OA.Dataset.NET
+    
   Ref.NET --> OA.Fakedatabase.NET
+    
   OA.Dataset.NET --> OA.NET --> Schema.NET --> Schema
+    
   end
 
   subgraph php-lib [PHP Libraries]
+    
   ref-php --> dataset-site-php --> models-php
+    
   ref-php --> models-php
+    
   end
 
 
@@ -114,11 +149,15 @@ flowchart BT
   DMV --> ActivityList
   
   subgraph act [Activity List]
+    
   ActivityList --> ActivityListEditor
+    
   end
 
   DMVS --> DMV --> models
+    
   DMVS --> RPDEValidator 
+    
   Status --> CS --> DMV
 
 
@@ -129,18 +168,25 @@ flowchart BT
   validator -. Conforms to .-> specs
 
   Ref.NET<-. Tested By .-> TS
+    
   ref-php-. Tested By .-> TS
+    
   ref-ruby-. Tested By .-> TS
   
   TS --> DMV
 
   subgraph Documentation [Documentation]
-  Docs["Developer<br/>Documentation<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
-  NS["OpenActive<br/>Namespace<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+
+    Docs["Developer<br/>Documentation<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+
+    NS["OpenActive<br/>Namespace<br/><img src='https://travis-ci.com/openactive/data-models.svg?branch=master'/>"]
+
   end
 
   NS --> DM
+    
   Docs --> DM & Beta
+ 
   </div>
 </body>
 </html>
