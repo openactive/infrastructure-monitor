@@ -93,10 +93,47 @@
     });
   </script>
   <script>
+    var preloadImages = function(pictureUrls, callback) {
+      var i,
+          j,
+          loaded = 0;
+
+      for (i = 0, j = pictureUrls.length; i < j; i++) {
+          (function (img, src) {
+          		var countOne = function () {                               
+                  if (++loaded == pictureUrls.length && callback) {
+                      callback();
+                  }
+              };
+              var countError = function () {
+              	console.log('Error preloading image: ' + src);
+                countOne();
+              }
+          
+              img.onload = countOne;
+
+              // Use the following callback methods to debug
+              // in case of an unexpected behavior.
+              img.onerror = countError;
+              img.onabort = countError;
+
+              img.src = src;
+          } (new Image(), pictureUrls[i]));
+      }
+  	};
+  </script>
+  <script>
     $(function(){
     	$.get('https://openactive.io/infrastructure-monitor/infrastructure.mermaid', function ( graphDefinition ) {
-        mermaid.mermaidAPI.render('diagram', graphDefinition, g => {
-          throw "Bug in Mermaid: This error must be thrown for the diagram to render";
+      	// Extract all images
+        const images = [...graphDefinition.matchAll(/img src='(.*)'/g)].map(x => x[1]);
+        
+        // Preload images to ensure diagram is rendered correctly
+      	preloadImages(images, function() {
+          mermaid.mermaidAPI.render('diagram', graphDefinition, g => {
+          	// If this function doesn't throw an error, then the diagram doesn't render (?)
+            throw "Bug in Mermaid: This error must be thrown for the diagram to render";
+          });
         });
       });
     });
