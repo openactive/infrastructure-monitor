@@ -163,11 +163,3 @@ flowchart BT
   Docs --> Beta
 
   OA.Server.NET -. Conforms to .-> TestInterface
-
-  subgraph harvesting [Harvesting]
-  CS["Conformance Services<br/><img src='https://github.com/openactive/conformance-services/workflows/Node.js%20CI/badge.svg?branch=master'/>"]
-  click CS "https://github.com/openactive/conformance-services/"
-  Status["Status Page"]
-  click Status "https://github.com/openactive/conformance-status-page"
-  Status --> CS --> DMV
-  end
